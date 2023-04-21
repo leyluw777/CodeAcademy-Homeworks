@@ -203,7 +203,7 @@ string[] emails = new[]
             "doug_herman81@gmail.com",
             "winnifred56@yahoo.com"
 };
-
+Regex pattern = new Regex("[-_,*]");
 
 foreach (var item in emails.Select((mail, i) => (mail,i)))
 {
@@ -211,16 +211,15 @@ foreach (var item in emails.Select((mail, i) => (mail,i)))
     if (noDomains.Contains("-") 
        || noDomains.Contains("_")
        || noDomains.Contains(",")
-       || noDomains.Contains("vb.")
        || noDomains.Contains("."))
     {
-       
-        noDomains = noDomains
-                             .Replace("-", ".")
-                             .Replace("_", ".")
-                             .Replace(",", ".")
-                             .Replace("vb.", ".");
-        
+
+        //noDomains = noDomains
+        //                     .Replace("-", ".")
+        //                     .Replace("_", ".")
+        //                     .Replace(",", ".")
+        noDomains = pattern.Replace(noDomains, ".");
+
         for (int i = 0; i < noDomains.Length; i++)
         {
           
@@ -246,8 +245,7 @@ foreach (var item in emails.Select((mail, i) => (mail,i)))
   Domain    : {updatedNames.Substring(updatedNames.IndexOf("@") + 1,( updatedNames.LastIndexOf(".") - updatedNames.IndexOf("@") - 1))}
   Extension : {updatedNames.Substring(updatedNames.LastIndexOf(".") +1 , updatedNames.Length - updatedNames.LastIndexOf(".")-1)}
   -----------------------------");
-
+       
     }
-   
-
+    Console.ReadLine();
 };
