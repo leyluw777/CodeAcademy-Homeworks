@@ -219,33 +219,36 @@ foreach (var item in emails.Select((mail, i) => (mail,i)))
         //                     .Replace("_", ".")
         //                     .Replace(",", ".")
         noDomains = pattern.Replace(noDomains, ".");
-
-        for (int i = 0; i < noDomains.Length; i++)
+        if (noDomains.IndexOf('.') == noDomains.LastIndexOf('.'))
         {
-          
-            if (int.TryParse(noDomains[i].ToString(), out int hasNum))
+            for (int i = 0; i < noDomains.Length; i++)
             {
-         
-                noDomains = noDomains.Replace(hasNum.ToString(), " ");
+
+                if (int.TryParse(noDomains[i].ToString(), out int hasNum))
+                {
+
+                    noDomains = noDomains.Replace(hasNum.ToString(), " ");
+                }
+
             }
-            
-        }
 
-        noDomains = noDomains.Replace(" ", "");
-        
+            noDomains = noDomains.Replace(" ", "");
 
-        string updatedNames = noDomains.Insert(noDomains.Length,
-        item.mail.Substring(item.mail.IndexOf('@')));
 
-        //Console.WriteLine(updatedNames);
+            string updatedNames = noDomains.Insert(noDomains.Length,
+            item.mail.Substring(item.mail.IndexOf('@')));
 
-        Console.WriteLine(@$"  Firstname : {updatedNames.Substring(0, updatedNames.IndexOf("."))}
-  Lastname  : {updatedNames.Substring((updatedNames.IndexOf(".") + 1), updatedNames.IndexOf("@") - updatedNames.IndexOf(".") -1)}
+            //Console.WriteLine(updatedNames);
+
+            Console.WriteLine(@$"  Firstname : {updatedNames.Substring(0, updatedNames.IndexOf("."))}
+  Lastname  : {updatedNames.Substring((updatedNames.IndexOf(".") + 1), updatedNames.IndexOf("@") - updatedNames.IndexOf(".") - 1)}
   Mail      : {updatedNames}               
-  Domain    : {updatedNames.Substring(updatedNames.IndexOf("@") + 1,( updatedNames.LastIndexOf(".") - updatedNames.IndexOf("@") - 1))}
-  Extension : {updatedNames.Substring(updatedNames.LastIndexOf(".") +1 , updatedNames.Length - updatedNames.LastIndexOf(".")-1)}
+  Domain    : {updatedNames.Substring(updatedNames.IndexOf("@") + 1, (updatedNames.LastIndexOf(".") - updatedNames.IndexOf("@") - 1))}
+  Extension : {updatedNames.Substring(updatedNames.LastIndexOf(".") + 1, updatedNames.Length - updatedNames.LastIndexOf(".") - 1)}
   -----------------------------");
-       
+
+        }
+        
     }
-    Console.ReadLine();
+
 };
