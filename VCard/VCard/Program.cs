@@ -17,7 +17,7 @@ namespace HttpClientExtensionMethods
 
     public class Program
     {
-   
+       
 
       
         public static async Task Main() {
@@ -49,10 +49,5 @@ END:VCARD
             fs.Close();
             File.WriteAllLines(pathName, vcardArr);
         }
-
-
-      
-   
-
     }
 }
